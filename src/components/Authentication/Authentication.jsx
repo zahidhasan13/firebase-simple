@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../../firebase/firebase.config.js";
+import { Toaster, toast } from "react-hot-toast";
 
 const auth = getAuth(app);
 
@@ -40,7 +41,7 @@ const Authentication = () => {
       )
     ) {
       setError(
-        "At least one special character, one digit, one lowercase character, one uppercase character, Minimum 8 characters, Maximum 20 characters"
+        toast("At least one special character, one digit, one lowercase character, one uppercase character, Minimum 8 characters, Maximum 20 characters")
       );
       return;
     }
@@ -49,14 +50,14 @@ const Authentication = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setSuccess("Registration successful");
+        setSuccess(toast("Register Successful"));
         setError("");
         e.target.reset();
         emailVerification(user);
         updateUserData(user, name);
       })
       .catch((err) => {
-        setError("Already use this email");
+        setError(toast("Already use this mail"));
         setSuccess("");
       });
   };
@@ -71,12 +72,12 @@ const Authentication = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         const user = result.user;
-        setSuccess("Login successful");
+        setSuccess(toast("Login Successful"));
         setError("");
         e.target.reset();
       })
       .catch((err) => {
-        setError("Invalid username or password");
+        setError(toast("Invalid username or password"));
         setSuccess("");
       });
   };
@@ -97,7 +98,7 @@ const Authentication = () => {
   //Email Varification
   const emailVerification = (user) => {
     sendEmailVerification(user).then(() => {
-      alert("Check your email");
+      toast("Check your mail");
     });
   };
 
@@ -105,11 +106,11 @@ const Authentication = () => {
   const handleResetPassword = (e) => {
     const email = emailRef.current.value;
     if (!email) {
-      alert("Please enter your email");
+      toast("Please enter your email");
     }
     sendPasswordResetEmail(auth, email)
       .then(() => {
-        alert("Check your email");
+        toast("Check your mail")
       })
       .catch((err) => {
         alert(err.message);
@@ -141,6 +142,7 @@ const Authentication = () => {
           />
         )}
       </div>
+      <div><Toaster/></div>
     </div>
   );
 };

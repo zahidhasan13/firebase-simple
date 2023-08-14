@@ -1,12 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import './index.css'
-import Main from './components/layout/main';
-import Authentication from './components/Authentication/Authentication';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Authentication from "./components/Authentication/Authentication";
+import Main from "./components/layout/main";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -16,13 +13,13 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Authentication></Authentication>,
-      }
-    ]
+      },
+    ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
